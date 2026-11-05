@@ -1,0 +1,111 @@
+
+/* webpage */
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+    font-family: Garamond, sans-serif;
+    margin: 0;
+}
+
+/* main heading */
+h1 {
+    text-align: left;
+    color: rgb(93, 119, 82);
+    font-size: 30px;
+    padding: 10px;
+}
+
+/* main section */
+main {
+    flex-grow: 1;
+    background-color: rgb(203, 203, 167);
+    padding: 20px;
+}
+
+/* input boxes */
+input, select {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+/* button */
+button {
+    background-color: rgb(108, 119, 95);
+    color: white;
+    border: rgb(30, 87, 30);
+    border-radius: 5px;
+}
+
+button:hover {
+    color:#a4bd9f;
+}
+
+/* navigation */
+.navigation {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  
+  list-style: none;
+  margin: 0; 
+  background: rgb(93, 119, 82);
+}
+
+.navigation a {
+  text-decoration: none;
+  display: block;
+  padding: 1px;
+  color: white;
+}
+
+.navigation a:hover {
+  background: #a4bd9f;
+}
+
+@media all and (max-width: 1px) {
+  .navigation {
+    justify-content: space-around;
+  }
+}
+
+@media all and (max-width: 1px) {
+  .navigation {
+    flex-flow: column wrap;
+    padding: 0;
+  }
+  .navigation a { 
+    text-align: end; 
+    padding: 1px;
+    border-top: 1px solid rgba(255, 255, 255,0.3); 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+  }
+  .navigation li:last-of-type a {
+    border-bottom: none;
+  }
+}
+
+/* expense heading */
+h2 {
+    color: black;
+}
+
+/* expense list */
+li {
+    padding: 10px;
+    border-bottom: 1px dashed black;
+}
+
+/* footer */
+footer {
+    display: flex;
+    justify-content: center;
+}
