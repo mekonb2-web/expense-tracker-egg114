@@ -1,34 +1,46 @@
 name: Test and Deploy Website
+
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
+
 jobs:
-test:
-name: Run Unit Tests
-runs-on: ubuntu-latest
-steps:
-- name: Get repository files
-uses: actions/checkout@v4
-- name: Set up JavaScript testing environment
-uses: actions/setup-node@v4
-with:
-node-version: 22
-- name: Run unit tests
-run: node --test tests/*.test.mjs
-deploy:
-name: Deploy to S3
-runs-on: ubuntu-latest
-needs: test
-steps:
-- name: Get repository files
-uses: actions/checkout@v4
-- name: Connect to AWS
-uses: aws-actions/configure-aws-credentials@v4
-with:
-aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-aws-region: ${{ vars.AWS_REGION }}
-- name: Upload website to S3
-run: aws s3 sync . s3://${{ vars.S3_BUCKET }} --delete --exclude
-".git/*" --exclude ".github/*" --exclude "tests/*" --exclude "*.test.mjs"
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get repository files
+        uses: actions/checkout@v4
+
+      - name: Set up JavaScript testing environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Run unit tests
+        run: node --test tests/*.test.mjs
+
+  deploy:
+    name: Deploy to S3
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Get repository files
+        uses: actions/checkout@v4
+
+      - name: Connect to AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Upload website to S3
+        run: |
+          aws s3 cp expense.html s3://${{ vars.S3_BUCKET }}/expense.html
+          aws s3 cp style.css s3://${{ vars.S3_BUCKET }}/style.css
+          aws s3 cp script.js s3://${{ vars.S3_BUCKET }}/script.js
+          aws s3 cp functions.mjs s3://${{ vars.S3_BUCKET }}/functions.mjs
