@@ -63,40 +63,7 @@
     </footer>
     
 
-<script>
-    
-    const expenses = [];
-
-    // for expenses to be added to list
-    document.getElementById("expense-form").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        // get expense info
-        const name = document.getElementById("expenseName").value;
-        const amount = document.getElementById("expenseAmount").value;
-        const date = document.getElementById("expenseDate").value;
-        const category = document.getElementById("expenseCategory").value;
-
-        // add expense to list
-        expenses.push({
-            name: name,
-            amount: amount,
-            date: date,
-            category: category,
-            //payment: payment
-        });
-        
-    // display expenses
-    const list = document.getElementById("expenseList");
-    list.innerHTML = "";
-    expenses.forEach(expense => {
-        const item = document.createElement("li");
-        item.innerHTML = expense.name + " - $" + expense.amount + " - " + expense.date + " - " + expense.category ;
-        list.appendChild(item);
-    
-        });
-    });
-</script>
+<script type="module" src="script.js"></script>
 
 
 </body>
