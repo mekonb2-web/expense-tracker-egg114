@@ -1,5 +1,5 @@
 export function createExpense(name, amount, date, category) {
-    return {name, amount, date, category};
+    return {name, amount: 0, date, category};
 }
 
 export function sortExpenses(expenses) {
